@@ -28,4 +28,4 @@
 
 - Mission 1) styled-components 설치하기
 - Mission 2) style 폴더 파일 추가 및 index.js 내용 변경하기
-- Mission 3) scss로 적용된 스타일을 styled-components로 변경하기 (노션 참고하기)
+- Mission 3) scss로 적용된 스타일을 styled-components로 변경하기
