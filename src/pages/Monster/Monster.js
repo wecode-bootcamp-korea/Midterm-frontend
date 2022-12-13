@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Card from "./components/Card/Card";
 import "./Monster.scss";
 
 const initialInfo = {
@@ -12,6 +13,7 @@ const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
   const [newInfo, setNewInfo] = useState(initialInfo);
+  const [clickedCardId, setClickedCardId] = useState(0);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -60,32 +62,22 @@ const Monster = () => {
       <div className="cardWrap">
         {userInfo.map((info) => {
           return (
-            <div key={info.id} className="cardBox">
-              <img
-                className="cardImage"
-                src={`https://robohash.org/${info.id}?set=set1&size=180x180`}
-                alt="monstert"
-              />
-              <span className="cardName">{info.name}</span>
-              <span>{info.email}</span>
-              <span>{info.company.name}</span>
-              <span>{info.address.city}</span>
-            </div>
+            <Card
+              key={info.id}
+              clickedCardId={clickedCardId}
+              setClickedCardId={setClickedCardId}
+              {...info}
+            />
           );
         })}
         {newUserInfo.map((info) => {
           return (
-            <div key={info.id} className="cardBox">
-              <img
-                className="cardImage"
-                src={`https://robohash.org/${info.id}?set=set1&size=180x180`}
-                alt="monstert"
-              />
-              <span className="cardName">{info.name}</span>
-              <span>{info.email}</span>
-              <span>{info.company}</span>
-              <span>{info.city}</span>
-            </div>
+            <Card
+              key={info.id}
+              clickedCardId={clickedCardId}
+              setClickedCardId={setClickedCardId}
+              {...info}
+            />
           );
         })}
       </div>
