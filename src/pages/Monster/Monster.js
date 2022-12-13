@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Monster.scss";
 
-const initialNewInfo = {
+const initialInfo = {
   name: "",
   email: "",
   company: "",
@@ -11,7 +11,7 @@ const initialNewInfo = {
 const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
-  const [newInfo, setNewInfo] = useState(initialNewInfo);
+  const [newInfo, setNewInfo] = useState(initialInfo);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -31,7 +31,7 @@ const Monster = () => {
   const createUserInfo = () => {
     if (isUserInfoValid) {
       setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]);
-      setNewInfo(initialNewInfo);
+      setNewInfo(initialInfo);
     } else {
       alert("내용을 모두 채워주세요");
     }
