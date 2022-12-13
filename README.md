@@ -9,7 +9,8 @@
 1. repo를 clone 받으시고 **`npm install`** 을 통해 package 다운로드를 진행해 주세요.
 2. src → Monsters 폴더가 존재하는지 확인해 주세요.
 3. Monsters 폴더 내에 Monsters.js와 Monsters.scss가 있는지 확인해 주세요.
-4. 전부 확인하셨다면 각자 branch를 생성하시고 아래의 과제를 수행해 주세요.
+4. components 폴더 내에 Card 폴더가 있고, 그 안에 Card.js와 Card.scss가 있는지 확인해주세요.
+5. 전부 확인하셨다면 각자 branch를 생성하시고 아래의 과제를 수행해 주세요.
 
 ## 과제 안내
 
