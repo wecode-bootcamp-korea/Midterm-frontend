@@ -17,12 +17,12 @@
 
 - Mission 1) 폴더 구조 구성
 - Mission 2) useInput Hook 구현
-- Mission 3) Monster 컴포넌트에서 import 해서 사용하기
+- Mission 3) Monster 컴포넌트에서 useInput 사용하기
 
 ### 2. Custom Hook - useFetch 구현
 
 - Mission 1) useFetch Hook 구현
-- Mission 2) Monster 컴포넌트에서 import 해서 사용하기
+- Mission 2) Monster 컴포넌트에서 useFetch 사용하기
 
 ### 3. Styled-components
 
