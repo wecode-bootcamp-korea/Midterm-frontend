@@ -1,8 +1,8 @@
-# [Custom Hook & Styled-component] Exercises
+# [Custom Hook & Styled-components] Exercises
 
 > 커스텀 훅과 스타일 컴포넌트 repository 입니다. 아래 내용을 확인하시고 과제를 진행해 주세요!
 
-## Assignment | Monsters
+## Assignment | Custom Hook & Styled-components
 
 기본적인 Routes 및 파일 구조 세팅은 되어 있습니다. 아래의 순서대로 진행해 주시고 폴더와 파일들이 존재하는지 확인해 주세요.
 
