@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const useFetch = () => {
+const useFetch = (url) => {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }, []);

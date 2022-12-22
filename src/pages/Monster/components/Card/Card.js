@@ -1,4 +1,4 @@
-import "./Card.scss";
+import styled from "styled-components";
 
 const Card = ({
   id,
@@ -11,18 +11,17 @@ const Card = ({
   setClickedCardId,
 }) => {
   return (
-    <div
-      className={`cardBox ${clickedCardId === id ? "active" : "default"}`}
+    <CardBox
+      selected={clickedCardId === id}
       onClick={() => {
         setClickedCardId(id);
       }}
     >
-      <img
-        className="cardImage"
+      <CardImage
         src={`https://robohash.org/${id}?set=set1&size=180x180`}
         alt="monstert"
       />
-      <span className="cardName">{name}</span>
+      <CardName>{name}</CardName>
       <span>{email}</span>
       {company.name ? (
         <>
@@ -35,8 +34,28 @@ const Card = ({
           <span>{city}</span>
         </>
       )}
-    </div>
+    </CardBox>
   );
 };
 
 export default Card;
+
+const CardBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid ${(props) => (props.selected ? "coral" : "black")};
+`;
+
+const CardImage = styled.img`
+  margin-bottom: 20px;
+  border-radius: 100%;
+`;
+
+const CardName = styled.span`
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+`;

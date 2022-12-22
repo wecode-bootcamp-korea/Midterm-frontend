@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
 import useInput from "../../hooks/useInput";
 import useFetch from "../../hooks/useFetch";
-import "./Monster.scss";
+import styled from "styled-components";
 
 const initialInfo = {
   name: "",
@@ -12,17 +12,10 @@ const initialInfo = {
 };
 
 const Monster = () => {
-  // const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
   const [newInfo, handleInfo, initInfo] = useInput(initialInfo);
   const [userInfo] = useFetch("https://jsonplaceholder.typicode.com/users");
   const [clickedCardId, setClickedCardId] = useState(0);
-
-  // useEffect(() => {
-  //   fetch()
-  //     .then((res) => res.json())
-  //     .then((data) => setUserInfo(data));
-  // }, []);
 
   const { name, email, company, city } = newInfo;
   const nextUserId = userInfo.length + newUserInfo.length + 1;
@@ -38,14 +31,13 @@ const Monster = () => {
   };
 
   return (
-    <section className="container">
-      <h1 className="title">MONSTER</h1>
-      <div className="searchWrap">
+    <Container>
+      <Title>MONSTER</Title>
+      <SearchWrap>
         {INPUT_LIST.map((list) => {
           return (
-            <input
+            <SearchInput
               key={list}
-              className="searchInput"
               name={list}
               placeholder={list}
               value={newInfo[list]}
@@ -53,11 +45,11 @@ const Monster = () => {
             />
           );
         })}
-        <button className="createBtn" onClick={createUserInfo}>
+        <CreateBtn className="createBtn" onClick={createUserInfo}>
           New
-        </button>
-      </div>
-      <div className="cardWrap">
+        </CreateBtn>
+      </SearchWrap>
+      <CardWrap>
         {userInfo.map((info) => {
           return (
             <Card
@@ -78,11 +70,53 @@ const Monster = () => {
             />
           );
         })}
-      </div>
-    </section>
+      </CardWrap>
+    </Container>
   );
 };
 
 export default Monster;
 
 const INPUT_LIST = ["name", "email", "company", "city"];
+
+const Container = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 100vh;
+`;
+
+const Title = styled.h1`
+  margin: 20px 0;
+  font-size: 40px;
+  font-weight: 900;
+`;
+
+const SearchWrap = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+const SearchInput = styled.input`
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+`;
+
+const CreateBtn = styled.button`
+  padding: 5px;
+  width: 100px;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  cursor: pointer;
+`;
+
+const CardWrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+`;
