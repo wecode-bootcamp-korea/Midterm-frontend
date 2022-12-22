@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
+import useInput from "../../hooks/useInput";
 import "./Monster.scss";
 
 const initialInfo = {
@@ -12,7 +13,7 @@ const initialInfo = {
 const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
-  const [newInfo, setNewInfo] = useState(initialInfo);
+  const [newInfo, handleInfo, initInfo] = useInput(initialInfo);
   const [clickedCardId, setClickedCardId] = useState(0);
 
   useEffect(() => {
@@ -25,15 +26,15 @@ const Monster = () => {
   const nextUserId = userInfo.length + newUserInfo.length + 1;
   const isUserInfoValid = name && email && company && city;
 
-  const handleInput = ({ target }) => {
-    const { name, value } = target;
-    setNewInfo((prev) => ({ ...prev, [name]: value }));
-  };
+  // const handleInput = ({ target }) => {
+  //   const { name, value } = target;
+  //   setNewInfo((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const createUserInfo = () => {
     if (isUserInfoValid) {
       setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]);
-      setNewInfo(initialInfo);
+      initInfo();
     } else {
       alert("내용을 모두 채워주세요");
     }
@@ -51,7 +52,7 @@ const Monster = () => {
               name={list}
               placeholder={list}
               value={newInfo[list]}
-              onChange={handleInput}
+              onChange={handleInfo}
             />
           );
         })}
