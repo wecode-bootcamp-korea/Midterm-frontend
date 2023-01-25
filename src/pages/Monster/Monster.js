@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "./components/Card/Card";
 import { useInput } from "../../hooks/useInput";
 import { useFetch } from "../../hooks/useFetch";
-import "./Monster.scss";
+import * as M from "./Monster.styles";
+// import "./Monster.scss";
 
 const initialInfo = {
   name: "",
@@ -31,9 +32,9 @@ const Monster = () => {
   };
 
   return (
-    <section className="container">
-      <h1 className="title">MONSTER</h1>
-      <div className="searchWrap">
+    <M.Container>
+      <M.Title className="title">MONSTER</M.Title>
+      <M.SearchWrap className="searchWrap">
         {INPUT_LIST.map((list) => {
           return (
             <input
@@ -49,8 +50,8 @@ const Monster = () => {
         <button className="createBtn" onClick={createUserInfo}>
           New
         </button>
-      </div>
-      <div className="cardWrap">
+      </M.SearchWrap>
+      <M.CardWrap className="cardWrap">
         {data.userInfo.map((info) => {
           return (
             <Card
@@ -71,8 +72,8 @@ const Monster = () => {
             />
           );
         })}
-      </div>
-    </section>
+      </M.CardWrap>
+    </M.Container>
   );
 };
 

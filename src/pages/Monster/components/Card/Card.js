@@ -1,4 +1,5 @@
-import "./Card.scss";
+import { click } from "@testing-library/user-event/dist/click";
+import * as C from "./Card.styles";
 
 const Card = ({
   id,
@@ -11,18 +12,18 @@ const Card = ({
   setClickedCardId,
 }) => {
   return (
-    <div
-      className={`cardBox ${clickedCardId === id ? "active" : "default"}`}
+    <C.CardBox
+      isActive={clickedCardId === id}
       onClick={() => {
         setClickedCardId(id);
       }}
     >
-      <img
+      <C.CardImage
         className="cardImage"
         src={`https://robohash.org/${id}?set=set1&size=180x180`}
         alt="monstert"
       />
-      <span className="cardName">{name}</span>
+      <C.CardName className="cardName">{name}</C.CardName>
       <span>{email}</span>
       {company.name ? (
         <>
@@ -35,7 +36,7 @@ const Card = ({
           <span>{city}</span>
         </>
       )}
-    </div>
+    </C.CardBox>
   );
 };
 
