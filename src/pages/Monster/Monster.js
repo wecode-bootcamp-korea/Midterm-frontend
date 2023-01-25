@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
+import useFetch from '../../hooks/useFetch';
 import Card from "./components/Card/Card";
 import "./Monster.scss";
 
@@ -12,8 +13,8 @@ const initialInfo = {
 
 const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
-  const [newUserInfo, setNewUserInfo] = useState([]);
   const [newInfo, handleInfo, initInfo] = useInput(initialInfo);
+  const {loading, data, error} = useFetch("https://jsonplaceholder.typicode.com/users");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -39,6 +40,9 @@ const Monster = () => {
     }
   };
 
+  if(error) return alert(error);
+  if(loading) return null;
+
   return (
     <section className="container">
       <h1 className="title">MONSTER</h1>
@@ -60,7 +64,7 @@ const Monster = () => {
         </button>
       </div>
       <div className="cardWrap">
-        {userInfo.map((info) => {
+        {data.map((info) => {
           return (
             <Card
               key={info.id}
