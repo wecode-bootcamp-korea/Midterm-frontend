@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
 import { useInput } from "../../hooks/useInput";
+import { useFetch } from "../../hooks/useFetch";
 import "./Monster.scss";
 
 const initialInfo = {
@@ -11,18 +12,14 @@ const initialInfo = {
 };
 
 const Monster = () => {
-  const [userInfo, setUserInfo] = useState([]);
+  const baseUrl = "https://jsonplaceholder.typicode.com";
+
   const [newUserInfo, setNewUserInfo] = useState([]);
   const [clickedCardId, setClickedCardId] = useState(0);
   const info = useInput(initialInfo);
+  const data = useFetch(baseUrl, "users");
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUserInfo(data));
-  }, []);
-
-  const nextUserId = userInfo.length + newUserInfo.length + 1;
+  const nextUserId = data.userInfo.length + newUserInfo.length + 1;
 
   const createUserInfo = () => {
     if (info.isUserInfoValid) {
@@ -54,7 +51,7 @@ const Monster = () => {
         </button>
       </div>
       <div className="cardWrap">
-        {userInfo.map((info) => {
+        {data.userInfo.map((info) => {
           return (
             <Card
               key={info.id}
