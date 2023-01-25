@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useInput from "../../hooks/useInput";
 import Card from "./components/Card/Card";
 import "./Monster.scss";
 
@@ -12,8 +13,7 @@ const initialInfo = {
 const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
-  const [newInfo, setNewInfo] = useState(initialInfo);
-  const [clickedCardId, setClickedCardId] = useState(0);
+  const [newInfo, handleInfo, initInfo] = useInput(initialInfo);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -33,7 +33,7 @@ const Monster = () => {
   const createUserInfo = () => {
     if (isUserInfoValid) {
       setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]);
-      setNewInfo(initialInfo);
+      initInfo();
     } else {
       alert("내용을 모두 채워주세요");
     }
@@ -51,7 +51,7 @@ const Monster = () => {
               name={list}
               placeholder={list}
               value={newInfo[list]}
-              onChange={handleInput}
+              onChange={handleInfo}
             />
           );
         })}
