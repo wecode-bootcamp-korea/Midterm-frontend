@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
-import useFetch from '../../hooks/useFetch';
+import useFetch from "../../hooks/useFetch";
 import Card from "./components/Card/Card";
 import "./Monster.scss";
 import styled from "styled-components";
@@ -14,8 +14,12 @@ const initialInfo = {
 
 const Monster = () => {
   const [userInfo, setUserInfo] = useState([]);
+  const [newUserInfo, setNewUserInfo] = useState([]);
+  const [clickedCardId, setClickedCardId] = useState(0);
   const [newInfo, handleInfo, initInfo] = useInput(initialInfo);
-  const {loading, data, error} = useFetch("https://jsonplaceholder.typicode.com/users");
+  const { loading, data, error } = useFetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -27,10 +31,10 @@ const Monster = () => {
   const nextUserId = userInfo.length + newUserInfo.length + 1;
   const isUserInfoValid = name && email && company && city;
 
-  const handleInput = ({ target }) => {
-    const { name, value } = target;
-    setNewInfo((prev) => ({ ...prev, [name]: value }));
-  };
+  // const handleInput = ({ target }) => {
+  //   const { name, value } = target;
+  //   setNewInfo((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const createUserInfo = () => {
     if (isUserInfoValid) {
@@ -41,8 +45,8 @@ const Monster = () => {
     }
   };
 
-  if(error) return alert(error);
-  if(loading) return null;
+  if (error) return alert(error);
+  if (loading) return null;
 
   return (
     <section className="container">
@@ -60,9 +64,7 @@ const Monster = () => {
             />
           );
         })}
-        <CreateBtn onClick={createUserInfo}>
-          New
-        </CreateBtn>
+        <CreateBtn onClick={createUserInfo}>New</CreateBtn>
       </div>
       <div className="cardWrap">
         {data.map((info) => {
@@ -107,6 +109,5 @@ const CreateBtn = styled.button`
   color: white;
   cursor: pointer;
 `;
-
 
 const INPUT_LIST = ["name", "email", "company", "city"];
