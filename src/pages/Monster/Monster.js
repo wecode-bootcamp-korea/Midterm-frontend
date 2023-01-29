@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useInput } from "../../hooks/useInput";
 import Card from "./components/Card/Card";
 import "./Monster.scss";
 
@@ -10,10 +11,11 @@ const initialInfo = {
 };
 
 const Monster = () => {
-  const [userInfo, setUserInfo] = useState([]);
-  const [newUserInfo, setNewUserInfo] = useState([]);
-  const [newInfo, setNewInfo] = useState(initialInfo);
+  const [userInfo, setUserInfo] = useState([]); // fetch 로 받아오는 정보 (배열)
+  const [newUserInfo, setNewUserInfo] = useState([]); // input 으로 받아서 새로 추가되는 정보 (배열)
+
   const [clickedCardId, setClickedCardId] = useState(0);
+  const [newInfo, saveNewInfo, inputState] = useInput(initialInfo); // useInput 의 [newInput, saveNewInput, inputReset] 을 [newInfo, saveNewInfo, inputState] 으로 받음 / 초기값 공백
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -25,15 +27,10 @@ const Monster = () => {
   const nextUserId = userInfo.length + newUserInfo.length + 1;
   const isUserInfoValid = name && email && company && city;
 
-  const handleInput = ({ target }) => {
-    const { name, value } = target;
-    setNewInfo((prev) => ({ ...prev, [name]: value }));
-  };
-
   const createUserInfo = () => {
     if (isUserInfoValid) {
-      setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]);
-      setNewInfo(initialInfo);
+      setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]); // input 으로 입력 받은 newInfo 값 {name: '', email: '', company: '', city: '', id: ''} 을 newUserInfo (배열) 에 추가
+      inputState(); // input 공백으로
     } else {
       alert("내용을 모두 채워주세요");
     }
@@ -51,7 +48,7 @@ const Monster = () => {
               name={list}
               placeholder={list}
               value={newInfo[list]}
-              onChange={handleInput}
+              onChange={saveNewInfo}
             />
           );
         })}
