@@ -1,4 +1,4 @@
-import "./Card.scss";
+import './Card.scss';
 
 const Card = ({
   id,
@@ -12,7 +12,7 @@ const Card = ({
 }) => {
   return (
     <div
-      className={`cardBox ${clickedCardId === id ? "active" : "default"}`}
+      className={`cardBox ${clickedCardId === id ? 'active' : 'default'}`}
       onClick={() => {
         setClickedCardId(id);
       }}
