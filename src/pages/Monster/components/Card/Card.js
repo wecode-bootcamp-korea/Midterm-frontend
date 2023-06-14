@@ -1,4 +1,5 @@
 import "./Card.scss";
+import styled from "styled-components";
 
 const Card = ({
   id,
@@ -11,8 +12,8 @@ const Card = ({
   setClickedCardId,
 }) => {
   return (
-    <div
-      className={`cardBox ${clickedCardId === id ? "active" : "default"}`}
+    <CardBox
+      seleted={clickedCardId === id}
       onClick={() => {
         setClickedCardId(id);
       }}
@@ -35,8 +36,17 @@ const Card = ({
           <span>{city}</span>
         </>
       )}
-    </div>
+    </CardBox>
   );
 };
 
 export default Card;
+
+const CardBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid ${(props) => (props.seleted ? "coral" : "black")};
+  border-radius: 10px;
+`;
