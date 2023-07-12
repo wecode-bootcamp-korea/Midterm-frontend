@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import "./Card.scss";
 
 const Card = ({
@@ -11,8 +12,8 @@ const Card = ({
   setClickedCardId,
 }) => {
   return (
-    <div
-      className={`cardBox ${clickedCardId === id ? "active" : "default"}`}
+    <CardColor
+      condition={clickedCardId === id}
       onClick={() => {
         setClickedCardId(id);
       }}
@@ -35,8 +36,28 @@ const Card = ({
           <span>{city}</span>
         </>
       )}
-    </div>
+    </CardColor>
   );
 };
 
 export default Card;
+
+const CardColor = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: ${(props) =>
+    props.condition ? props.theme.active : props.theme.default};
+  .img {
+    margin-bottom: 20px;
+    border-radius: 100%;
+  }
+
+  .span {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+`;
