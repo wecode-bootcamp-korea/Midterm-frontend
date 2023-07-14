@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
 import "./Monster.scss";
+import useInput from "../../hooks/useInput";
+import useFetch from "../../hooks/useFetch";
 
 const initialInfo = {
   name: "",
@@ -10,30 +12,19 @@ const initialInfo = {
 };
 
 const Monster = () => {
-  const [userInfo, setUserInfo] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState([]);
-  const [newInfo, setNewInfo] = useState(initialInfo);
   const [clickedCardId, setClickedCardId] = useState(0);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUserInfo(data));
-  }, []);
+  const [initValue, handleInput, newInfo] = useInput(initialInfo);
+  const userInfo = useFetch("https://jsonplaceholder.typicode.com/users");
 
   const { name, email, company, city } = newInfo;
   const nextUserId = userInfo.length + newUserInfo.length + 1;
   const isUserInfoValid = name && email && company && city;
 
-  const handleInput = ({ target }) => {
-    const { name, value } = target;
-    setNewInfo((prev) => ({ ...prev, [name]: value }));
-  };
-
   const createUserInfo = () => {
     if (isUserInfoValid) {
       setNewUserInfo((prev) => [...prev, { ...newInfo, id: nextUserId }]);
-      setNewInfo(initialInfo);
+      initValue();
     } else {
       alert("내용을 모두 채워주세요");
     }
