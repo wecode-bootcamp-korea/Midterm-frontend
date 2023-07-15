@@ -3,6 +3,7 @@ import Card from "./components/Card/Card";
 import "./Monster.scss";
 import useInput from "../../hooks/useInput";
 import useFetch from "../../hooks/useFetch";
+import styled from "styled-components";
 
 const initialInfo = {
   name: "",
@@ -36,9 +37,8 @@ const Monster = () => {
       <div className="searchWrap">
         {INPUT_LIST.map((list) => {
           return (
-            <input
+            <SearchInput
               key={list}
-              className="searchInput"
               name={list}
               placeholder={list}
               value={newInfo[list]}
@@ -46,9 +46,7 @@ const Monster = () => {
             />
           );
         })}
-        <button className="createBtn" onClick={createUserInfo}>
-          New
-        </button>
+        <CreateBtn onClick={createUserInfo}>New</CreateBtn>
       </div>
       <div className="cardWrap">
         {userInfo.map((info) => {
@@ -77,5 +75,21 @@ const Monster = () => {
 };
 
 export default Monster;
+
+const SearchInput = styled.input`
+  padding: 5px;
+  border: 1px solid ${(props) => props.theme.inputBorder};
+  border-radius: 5px;
+  outline: none;
+`;
+
+const CreateBtn = styled.button`
+  padding: 5px;
+  width: 100px;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.createButton};
+  color: white;
+  cursor: pointer;
+`;
 
 const INPUT_LIST = ["name", "email", "company", "city"];
